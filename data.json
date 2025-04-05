@@ -1,0 +1,82 @@
+{
+      "topics": {
+      "abstract": {
+        "meaning": "A brief summary of the main points.",
+        "synonyms": ["summary", "overview", "gist"],
+        "antonyms": ["detail", "expansion"],
+        "words": ["summarize", "abstractify"],
+        "phrasebank": ["In an abstract sense", "Abstractly speaking"]
+      },
+      "introduction": {
+        "meaning": "Beginning section introducing the subject.",
+        "synonyms": ["opening", "preface"],
+        "antonyms": ["ending", "conclusion"],
+        "words": ["begin", "initiate"],
+        "phrasebank": ["To begin with", "The introduction covers"]
+      }
+    },
+  
+   "prasebank": {
+      "abstract": {
+         "phrases": ["In the abstract", "Abstract perspective"]
+      },
+      "introduction": {
+         "phrases": ["In the abstract", "Abstract perspective"]
+      },
+     "related-work": {
+         "phrases": ["In the abstract", "Abstract perspective"]
+      }
+    },
+ "general-words": {
+      "abstract": {
+         "synonyms": ["opening", "preface"],
+        "antonyms": ["ending", "conclusion"],
+        "words": ["begin", "initiate"]
+      },
+      "introduction": {
+        "synonyms": ["opening", "preface"],
+        "antonyms": ["ending", "conclusion"],
+        "words": ["begin", "initiate"]
+      },
+     "related-work": {
+         "synonyms": ["opening", "preface"],
+        "antonyms": ["ending", "conclusion"],
+        "words": ["begin", "initiate"]
+      }
+    },
+  "grammar-rules": {
+              "rules": ["In the abstract", "Abstract perspective"]
+    },
+
+  "text-book": {
+             "general": {
+         "words": ["opening", "preface"],
+        "phrases": ["ending", "conclusion"],
+        "alternatives": ["begin", "initiate"]
+             },
+    "academic-writing": {
+       "words": ["opening", "preface"],
+         "synonyms": ["opening", "preface"],
+        "antonyms": ["ending", "conclusion"],
+        "phrases": ["ending", "conclusion"],
+        "alternatives": ["begin", "initiate"]
+      }
+    },
+
+   "research-papers": {
+             "general": {
+         "words": ["opening", "preface"],
+        "phrases": ["ending", "conclusion"],
+        "alternatives": ["begin", "initiate"]
+             },
+    "academic-writing": {
+       "words": ["opening", "preface"],
+         "synonyms": ["opening", "preface"],
+        "antonyms": ["ending", "conclusion"],
+        "phrases": ["ending", "conclusion"],
+        "alternatives": ["begin", "initiate"]
+      }
+    }
+  
+  
+}
