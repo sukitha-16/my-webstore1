@@ -251,7 +251,34 @@
 
    <div id="contentDisplay" class="p-4"></div>
 
-  <script src="script.js"></script>
+  
+<script>
+  // Handle nested dropdown click to toggle submenus
+  document.querySelectorAll('.dropdown-submenu .dropdown-toggle').forEach(function (element) {
+    element.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      let submenu = this.nextElementSibling;
+
+      // Close other open submenus
+      const openSubmenus = this.closest('.dropdown-menu').querySelectorAll('.dropdown-menu.show');
+      openSubmenus.forEach((menu) => {
+        if (menu !== submenu) menu.classList.remove('show');
+      });
+
+      submenu.classList.toggle('show');
+    });
+  });
+
+  // Close all submenus when clicking outside
+  document.addEventListener('click', function (e) {
+    document.querySelectorAll('.dropdown-menu.show').forEach((menu) => {
+      menu.classList.remove('show');
+    });
+  });
+</script>
+
  
 </body>
 </html>
