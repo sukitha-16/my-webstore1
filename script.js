@@ -1,55 +1,55 @@
+// Fetch and render JSON data
 fetch('data.json')
-  .then(res => res.json())
-  .then(data => buildMenus(data))
-  .catch(err => {
-    document.getElementById('output-box').textContent = 'Failed to load data.json.';
-    console.error(err);
-  });
+  .then(response => response.json())
+  .then(data => {
+    const container = document.getElementById('json-viewer');
+    container.appendChild(renderNode(data));
+  })
+  .catch(error => console.error('Error loading JSON:', error));
 
-function buildMenus(data) {
-  const container = document.getElementById('menu-container');
+// Recursive rendering function with click-to-toggle
+function renderNode(node) {
+  const ul = document.createElement('ul');
 
-  for (const menuName in data) {
-    const menuBtn = createToggleButton(menuName);
-    const topicDiv = document.createElement('div');
-    topicDiv.classList.add('nested');
+  for (const key in node) {
+    const li = document.createElement('li');
+    const value = node[key];
 
-    const topics = data[menuName]['topics'];
-    for (const topicName in topics) {
-      const topicBtn = createToggleButton(topicName);
-      const detailDiv = document.createElement('div');
-      detailDiv.classList.add('nested');
+    const keySpan = document.createElement('span');
+    keySpan.classList.add('key');
+    keySpan.textContent = key;
+    li.appendChild(keySpan);
 
-      const topicContent = topics[topicName];
-      for (const key in topicContent) {
-        const btn = document.createElement('button');
-        btn.textContent = key;
-        btn.onclick = () => {
-          const value = topicContent[key];
-          document.getElementById('output-box').textContent =
-            `${menuName} → ${topicName} → ${key}:\n` +
-            (Array.isArray(value) ? value.join(', ') : value);
-        };
-        detailDiv.appendChild(btn);
+    // Container for nested values
+    const nestedContainer = document.createElement('ul');
+    nestedContainer.classList.add('nested');
+
+    if (typeof value === 'object' && value !== null) {
+      if (Array.isArray(value)) {
+        value.forEach(item => {
+          const itemLi = document.createElement('li');
+          itemLi.classList.add('value');
+          itemLi.textContent = item;
+          nestedContainer.appendChild(itemLi);
+        });
+      } else {
+        nestedContainer.appendChild(renderNode(value)); // recursive
       }
-
-      topicDiv.appendChild(topicBtn);
-      topicDiv.appendChild(detailDiv);
+    } else {
+      const valueLi = document.createElement('li');
+      valueLi.classList.add('value');
+      valueLi.textContent = value;
+      nestedContainer.appendChild(valueLi);
     }
 
-    container.appendChild(menuBtn);
-    container.appendChild(topicDiv);
+    // Toggle visibility on key click
+    keySpan.addEventListener('click', () => {
+      li.classList.toggle('expanded');
+    });
+
+    li.appendChild(nestedContainer);
+    ul.appendChild(li);
   }
-}
 
-function createToggleButton(label) {
-  const btn = document.createElement('button');
-  btn.textContent = label;
-  btn.onclick = () => {
-    const next = btn.nextElementSibling;
-    if (next) {
-      next.style.display = next.style.display === 'block' ? 'none' : 'block';
-    }
-  };
-  return btn;
+  return ul;
 }
