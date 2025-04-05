@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Let's Start</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WordPath</title>
   <style>
     * {
       box-sizing: border-box;
@@ -12,72 +13,78 @@
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #e0eafc, #cfdef3);
-      min-height: 100vh;
+      background: linear-gradient(to right, #f9f9f9, #eef4f8);
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
+      min-height: 100vh;
     }
 
     .container {
       width: 90%;
-      max-width: 900px;
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      max-width: 950px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 2rem 1.5rem;
       margin-top: 40px;
-      position: relative;
-    }
-
-    .title {
-      text-align: center;
-      font-size: 2.4rem;
-      margin-bottom: 1.2rem;
-      color: #2c3e50;
-      font-weight: bold;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     }
 
     .icon {
       display: flex;
       justify-content: center;
       margin-bottom: 1rem;
+      animation: pulse 2s infinite;
     }
 
     .icon img {
-      height: 60px;
-      width: 60px;
+      height: 64px;
+      width: 64px;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.85; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .title {
+      text-align: center;
+      font-size: 2.6rem;
+      color: #2c3e50;
+      font-weight: bold;
+      margin-bottom: 0.8rem;
     }
 
     #json-viewer {
-      font-size: 0.95rem;
+      font-size: 1rem;
+      padding-top: 1rem;
     }
 
     ul {
-      list-style-type: none;
-      padding-left: 1rem;
+      list-style: none;
+      padding-left: 1.2rem;
     }
 
     li {
       margin: 6px 0;
-      padding: 4px 6px;
-      transition: background 0.2s ease;
-      border-left: 3px solid transparent;
+      padding: 6px 8px;
+      transition: background 0.2s;
+      border-left: 4px solid transparent;
     }
 
     li:hover {
-      background-color: #f1f9ff;
-      border-left: 3px solid #3498db;
+      background: #f0f8ff;
+      border-left: 4px solid #3498db;
     }
 
     .key {
       font-weight: 600;
-      color: #34495e;
       cursor: pointer;
       position: relative;
       display: inline-block;
-      padding-left: 18px;
+      color: #333;
+      padding-left: 20px;
     }
 
     .key::before {
@@ -93,7 +100,7 @@
     }
 
     .value {
-      color: #555;
+      color: #666;
       margin-left: 1rem;
       font-style: italic;
     }
@@ -108,9 +115,29 @@
 
     .footer {
       margin: 2rem 0;
+      font-size: 1.3rem;
+      color: #333;
       text-align: center;
-      font-size: 1.2rem;
-      color: #444;
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 600px) {
+      .title {
+        font-size: 2rem;
+      }
+
+      .icon img {
+        height: 50px;
+        width: 50px;
+      }
+
+      #json-viewer {
+        font-size: 0.95rem;
+      }
+
+      .footer {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
@@ -118,9 +145,9 @@
 
   <div class="container">
     <div class="icon">
-      <img src="https://cdn-icons-png.flaticon.com/512/888/888879.png" alt="Start Icon">
+      <img src="suryudu.png" alt="Let's Start Icon">
     </div>
-    <div class="title">Let's Start</div>
+    <div class="title">WordPath</div>
     <div id="json-viewer"></div>
   </div>
 
