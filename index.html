@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website with Menu</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">My Website</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          <!-- Topics -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="topicsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Topics
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="topicsDropdown">
+              <li><a class="dropdown-item" href="#" onclick="showContent('math')">Mathematics</a></li>
+              <li><a class="dropdown-item" href="#" onclick="showContent('science')">Science</a></li>
+              <li><a class="dropdown-item" href="#" onclick="showContent('history')">History</a></li>
+            </ul>
+          </li>
+
+          <!-- Phrase Bank -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="phraseBankDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Phrase Bank
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="phraseBankDropdown">
+              <li><a class="dropdown-item" href="#" onclick="showContent('academic')">Academic</a></li>
+              <li><a class="dropdown-item" href="#" onclick="showContent('casual')">Casual</a></li>
+              <li><a class="dropdown-item" href="#" onclick="showContent('technical')">Technical</a></li>
+            </ul>
+          </li>
+
+          <!-- Images -->
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showContent('images')">Images</a>
+          </li>
+
+          <!-- General Words -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="generalWordsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              General Words
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="generalWordsDropdown">
+              <li><a class="dropdown-item" href="#" onclick="showContent('verbs')">Verbs</a></li>
+              <li><a class="dropdown-item" href="#" onclick="showContent('nouns')">Nouns</a></li>
+              <li><a class="dropdown-item" href="#" onclick="showContent('adjectives')">Adjectives</a></li>
+            </ul>
+          </li>
+
+          <!-- Grammar Rules -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="grammarRulesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Grammar Rules
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="grammarRulesDropdown">
+              <li><a class="dropdown-item" href="#" onclick="showContent('tenses')">Tenses</a></li>
+              <li><a class="dropdown-item" href="#" onclick="showContent('modals')">Modals</a></li>
+              <li><a class="dropdown-item" href="#" onclick="showContent('conditionals')">Conditionals</a></li>
+            </ul>
+          </li>
+
+          <!-- Text Book -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="textbookDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Text Book
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="textbookDropdown">
+              <li><a class="dropdown-item" href="#" onclick="showContent('unit1')">Unit 1</a></li>
+              <li><a class="dropdown-item" href="#" onclick="showContent('unit2')">Unit 2</a></li>
+            </ul>
+          </li>
+
+          <!-- Research Paper -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="researchPaperDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Research Paper
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="researchPaperDropdown">
+              <li><a class="dropdown-item" href="#" onclick="showContent('structure')">Structure</a></li>
+              <li><a class="dropdown-item" href="#" onclick="showContent('references')">References</a></li>
+              <li><a class="dropdown-item" href="#" onclick="showContent('writing-style')">Writing Style</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main content area -->
+  <main class="container my-4">
+    <div id="content-area">
+      <p>Select a menu item to see the content.</p>
+    </div>
+  </main>
+
+  <script>
+    function showContent(section) {
+      document.getElementById("content-area").innerHTML = `<h3>Loading ${section.replace(/-/g, ' ')}...</h3>`;
+      // You can replace the above line with logic to fetch and show actual content if needed
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
