@@ -1,4 +1,3 @@
-// Fetch and render JSON data
 fetch('data.json')
   .then(response => response.json())
   .then(data => {
@@ -7,7 +6,6 @@ fetch('data.json')
   })
   .catch(error => console.error('Error loading JSON:', error));
 
-// Recursive rendering function with click-to-toggle
 function renderNode(node) {
   const ul = document.createElement('ul');
 
@@ -20,7 +18,6 @@ function renderNode(node) {
     keySpan.textContent = key;
     li.appendChild(keySpan);
 
-    // Container for nested values
     const nestedContainer = document.createElement('ul');
     nestedContainer.classList.add('nested');
 
@@ -33,7 +30,7 @@ function renderNode(node) {
           nestedContainer.appendChild(itemLi);
         });
       } else {
-        nestedContainer.appendChild(renderNode(value)); // recursive
+        nestedContainer.appendChild(renderNode(value));
       }
     } else {
       const valueLi = document.createElement('li');
@@ -42,7 +39,6 @@ function renderNode(node) {
       nestedContainer.appendChild(valueLi);
     }
 
-    // Toggle visibility on key click
     keySpan.addEventListener('click', () => {
       li.classList.toggle('expanded');
     });
