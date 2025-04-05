@@ -6,3 +6,36 @@
   left: 100%;
   margin-top: -1px;
 }
+      body {
+      font-family: Arial, sans-serif;
+      padding: 1rem;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 1rem;
+    }
+
+    li {
+      margin-bottom: 0.3rem;
+      cursor: pointer;
+    }
+
+    .key {
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    .value {
+      color: #34495e;
+      margin-left: 10px;
+    }
+
+    .nested {
+      display: none;
+    }
+
+    .expanded > .nested {
+      display: block;
+    }
+  
