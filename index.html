@@ -1,297 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Website with Menu</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <title>Reading Material</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      padding: 1rem;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f7fa;
+      padding: 2rem;
+      color: #333;
+    }
+
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+
+    #json-viewer {
+      background: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
     }
 
     ul {
       list-style-type: none;
       padding-left: 1rem;
+      margin: 0;
     }
 
     li {
-      margin-bottom: 0.3rem;
-      cursor: pointer;
+      margin: 4px 0;
+      transition: background 0.2s ease;
+      border-left: 2px solid transparent;
+      padding-left: 8px;
+    }
+
+    li:hover {
+      background-color: #eef2f5;
+      border-left: 2px solid #3498db;
     }
 
     .key {
-      font-weight: bold;
-      color: #2c3e50;
+      font-weight: 600;
+      color: #2980b9;
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .key::before {
+      content: '▶';
+      position: absolute;
+      left: 0;
+      font-size: 0.8rem;
+      transform: rotate(0deg);
+      transition: transform 0.2s ease;
+    }
+
+    .expanded > .key::before {
+      transform: rotate(90deg);
     }
 
     .value {
-      color: #34495e;
-      margin-left: 10px;
+      color: #555;
+      margin-left: 1rem;
+      font-style: italic;
     }
 
     .nested {
       display: none;
+      margin-left: 0.5rem;
     }
 
     .expanded > .nested {
       display: block;
     }
   </style>
-  
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">My Website</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-          <!-- Topics -->
-<li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" id="topicsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Topics
-  </a>
-  <ul class="dropdown-menu" aria-labelledby="topicsDropdown">
-
-    <!-- Sub-topics with nested dropdowns -->
-    <li class="dropdown-submenu">
-      <a class="dropdown-item dropdown-toggle" href="#">Abstract</a>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#" onclick="showContent('abstract-meaning')">Meanings</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('abstract-synonyms')">Synonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('abstract-antonyms')">Antonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('abstract-words')">Words</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('abstract-phrasebank')">Phrasebank</a></li>
-      </ul>
-    </li>
-
-    <li class="dropdown-submenu">
-      <a class="dropdown-item dropdown-toggle" href="#">Introduction</a>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#" onclick="showContent('introduction-meaning')">Meanings</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('introduction-synonyms')">Synonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('introduction-antonyms')">Antonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('introduction-words')">Words</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('introduction-phrasebank')">Phrasebank</a></li>
-      </ul>
-    </li>
-
-    <!-- Repeat the pattern for the rest -->
-    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Related Work</a>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#" onclick="showContent('relatedwork-meaning')">Meanings</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('relatedwork-synonyms')">Synonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('relatedwork-antonyms')">Antonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('relatedwork-words')">Words</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('relatedwork-phrasebank')">Phrasebank</a></li>
-      </ul>
-    </li>
-
-    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Background</a>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#" onclick="showContent('background-meaning')">Meanings</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('background-synonyms')">Synonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('background-antonyms')">Antonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('background-words')">Words</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('background-phrasebank')">Phrasebank</a></li>
-      </ul>
-    </li>
-
-    <!-- Repeat similarly for the rest -->
-    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Methodology</a> 
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#" onclick="showContent('methodology-meaning')">Meanings</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('methodology-synonyms')">Synonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('methodology-antonyms')">Antonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('methodology-words')">Words</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('methodology-phrasebank')">Phrasebank</a></li>
-      </ul>
-    </li>
-    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">System Design</a> 
-    <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#" onclick="showContent('system-design-meaning')">Meanings</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('system-design-synonyms')">Synonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('system-design-antonyms')">Antonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('system-design-words')">Words</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('system-design-phrasebank')">Phrasebank</a></li>
-      </ul>  
-    </li>
-    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">System Architecture</a> 
-     <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#" onclick="showContent('system-architecture-meaning')">Meanings</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('system-architecture-synonyms')">Synonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('system-architecture-antonyms')">Antonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('system-architecture-words')">Words</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('system-architecture-phrasebank')">Phrasebank</a></li>
-      </ul>  </li>
-    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Results</a> 
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#" onclick="showContent('results-meaning')">Meanings</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('results-synonyms')">Synonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('results-antonyms')">Antonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('results-words')">Words</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('results-phrasebank')">Phrasebank</a></li>
-      </ul> 
-    </li>
-    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Dataset</a>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#" onclick="showContent('dataset-meaning')">Meanings</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('dataset-synonyms')">Synonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('dataset-antonyms')">Antonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('dataset-words')">Words</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('dataset-phrasebank')">Phrasebank</a></li>
-      </ul> 
-    </li>
-    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Evaluation</a> 
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#" onclick="showContent('evaluation-meaning')">Meanings</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('evaluation-synonyms')">Synonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('evaluation-antonyms')">Antonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('evaluation-words')">Words</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('evaluation-phrasebank')">Phrasebank</a></li>
-      </ul> 
-    </li>
-    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Conclusion</a> 
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#" onclick="showContent('conclusion-meaning')">Meanings</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('conclusion-synonyms')">Synonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('conclusion-antonyms')">Antonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('conclusion-words')">Words</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('conclusion-phrasebank')">Phrasebank</a></li>
-      </ul> 
-    </li>
-    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Discussion</a> 
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#" onclick="showContent('discussion-meaning')">Meanings</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('discussion-synonyms')">Synonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('discussion-antonyms')">Antonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('discussion-words')">Words</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('discussion-phrasebank')">Phrasebank</a></li>
-      </ul> 
-    </li>
-    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Future Work</a> 
-    <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#" onclick="showContent('future-work-meaning')">Meanings</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('future-work-synonyms')">Synonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('future-work-antonyms')">Antonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('future-work-words')">Words</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('future-work-phrasebank')">Phrasebank</a></li>
-      </ul>   
-    </li>
-    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Limitation</a> 
-     <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#" onclick="showContent('limitation-meaning')">Meanings</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('limitation-synonyms')">Synonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('limitation-antonyms')">Antonyms</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('limitation-words')">Words</a></li>
-        <li><a class="dropdown-item" href="#" onclick="showContent('limitation-phrasebank')">Phrasebank</a></li>
-      </ul>   
-    </li>
-
-  </ul>
-</li>
-
-
-          
-
-          <!-- Phrase Bank -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="phraseBankDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Phrase Bank
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="phraseBankDropdown">
-              <li><a class="dropdown-item" href="#" onclick="showContent('academic')">Academic</a></li>
-              <li><a class="dropdown-item" href="#" onclick="showContent('casual')">Casual</a></li>
-              <li><a class="dropdown-item" href="#" onclick="showContent('technical')">Technical</a></li>
-            </ul>
-          </li>
-
-          <!-- Images -->
-          <li class="nav-item">
-            <a class="nav-link" href="#" onclick="showContent('images')">Images</a>
-          </li>
-
-          <!-- General Words -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="generalWordsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              General Words
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="generalWordsDropdown">
-              <li><a class="dropdown-item" href="#" onclick="showContent('verbs')">Verbs</a></li>
-              <li><a class="dropdown-item" href="#" onclick="showContent('nouns')">Nouns</a></li>
-              <li><a class="dropdown-item" href="#" onclick="showContent('adjectives')">Adjectives</a></li>
-            </ul>
-          </li>
-
-          <!-- Grammar Rules -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="grammarRulesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Grammar Rules
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="grammarRulesDropdown">
-              <li><a class="dropdown-item" href="#" onclick="showContent('tenses')">Tenses</a></li>
-              <li><a class="dropdown-item" href="#" onclick="showContent('modals')">Modals</a></li>
-              <li><a class="dropdown-item" href="#" onclick="showContent('conditionals')">Conditionals</a></li>
-            </ul>
-          </li>
-
-          <!-- Text Book -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="textbookDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Text Book
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="textbookDropdown">
-              <li><a class="dropdown-item" href="#" onclick="showContent('unit1')">Unit 1</a></li>
-              <li><a class="dropdown-item" href="#" onclick="showContent('unit2')">Unit 2</a></li>
-            </ul>
-          </li>
-
-          <!-- Research Paper -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="researchPaperDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Research Paper
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="researchPaperDropdown">
-              <li><a class="dropdown-item" href="#" onclick="showContent('structure')">Structure</a></li>
-              <li><a class="dropdown-item" href="#" onclick="showContent('references')">References</a></li>
-              <li><a class="dropdown-item" href="#" onclick="showContent('writing-style')">Writing Style</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Main content area -->
-  <main class="container my-4">
-    <div id="content-area">
-      <p>Select a menu item to see the content.</p>
-    </div>
-  </main>
-
-   <div id="contentDisplay" class="p-4"></div>
-
-  
-<h2>Interactive JSON Viewer</h2>
+  <h2>📁 Interactive JSON Viewer</h2>
   <div id="json-viewer"></div>
 
   <script src="script.js"></script>
-
- 
 </body>
 </html>
